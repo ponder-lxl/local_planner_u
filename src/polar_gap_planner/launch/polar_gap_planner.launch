@@ -1,0 +1,9 @@
+<launch>
+
+  <arg name="config_file" default="$(find polar_gap_planner)/config/default.yaml"/>
+
+  <node pkg="polar_gap_planner" type="polar_gap_planner_node" name="polar_gap_planner" output="screen">
+    <rosparam file="$(arg config_file)" command="load"/>
+  </node>
+
+</launch>

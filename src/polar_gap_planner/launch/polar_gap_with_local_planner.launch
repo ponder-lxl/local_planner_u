@@ -1,0 +1,29 @@
+<launch>
+
+  <!-- Polar gap global planner + existing local planner stack -->
+  <arg name="sensorOffsetX" default="0"/>
+  <arg name="sensorOffsetY" default="0"/>
+  <arg name="cameraOffsetZ" default="0"/>
+  <arg name="maxSpeed" default="1.0"/>
+  <arg name="autonomySpeed" default="1.0"/>
+
+  <include file="$(find polar_gap_planner)/launch/polar_gap_planner.launch"/>
+
+  <include file="$(find local_planner)/launch/local_planner.launch">
+    <arg name="sensorOffsetX" value="$(arg sensorOffsetX)"/>
+    <arg name="sensorOffsetY" value="$(arg sensorOffsetY)"/>
+    <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
+    <arg name="maxSpeed" value="$(arg maxSpeed)"/>
+    <arg name="autonomyMode" value="true"/>
+    <arg name="autonomySpeed" value="$(arg autonomySpeed)"/>
+    <arg name="twoWayDrive" value="true"/>
+  </include>
+
+  <!-- Override local planner params for U-trap / gap escape -->
+  <rosparam param="/localPlanner/dirThre">180.0</rosparam>
+  <rosparam param="/localPlanner/dirWeight">0.005</rosparam>
+  <rosparam param="/localPlanner/checkRotObstacle">true</rosparam>
+  <rosparam param="/localPlanner/autonomySpeed">$(arg autonomySpeed)</rosparam>
+  <rosparam param="/pathFollower/lookAheadDis">0.35</rosparam>
+
+</launch>
