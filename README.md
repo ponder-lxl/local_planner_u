@@ -14,4 +14,4 @@ local planner规划中是加了避障功能，但当进入到U型场景中，会
 
 主要添加的功能包为`polar_gap_planner`,实现效果：
 
-<video src="img/U.mp4"></video>
+[点击查看演示视频](img/U.mp4)
